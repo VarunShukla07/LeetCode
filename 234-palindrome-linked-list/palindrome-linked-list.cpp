@@ -1,9 +1,4 @@
-auto speedUp = []() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 0;
-}();
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -16,33 +11,21 @@ auto speedUp = []() {
  */
 class Solution {
 public:
-    ListNode* reverselist(ListNode* head){
-        if( head == 0 || head->next == 0) return head;
-        ListNode* newhead = reverselist(head->next);
-        ListNode* front = head->next;
-        front->next = head;
-        head->next = 0;
-        return newhead;
-    }
     bool isPalindrome(ListNode* head) {
-        ListNode* slow = head;
-        ListNode* fast = head;
-        while(fast->next != 0 && fast->next->next !=0){
-            slow = slow->next;
-            fast = fast->next->next;
+        string num = "";
+        while(head) {
+            num += head->val + '0';
+            head = head->next;
         }
-        ListNode* newhead = reverselist(slow->next);
-        slow = head;
-        ListNode* temp = newhead;
-        while(temp != nullptr){
-            if(slow->val != temp->val){
-                newhead = reverselist(newhead);
-                return false;
+        int i = 0, j = num.size()-1;
+        while(i <= j) {
+            if(num[i] == num[j]) {
+                i++;
+                j--;
             }
-            slow = slow->next;
-            temp = temp->next;
+            else
+                return false;
         }
-        newhead = reverselist(newhead);
         return true;
     }
 };
