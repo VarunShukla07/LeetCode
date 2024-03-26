@@ -7,7 +7,8 @@ auto speedUp = []() {
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        map<int, int> mpp;
+        unordered_map<int, int> mpp;
+        // int maxi = *max_element(nums.begin(),nums.end());
         int maxi = 0;
         for (int num : nums) {
             if (num > 0) {
