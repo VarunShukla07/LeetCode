@@ -11,8 +11,29 @@
  */
 class Solution {
 public:
+    void inorder(TreeNode* root,vector<int>& ans){
+        if(root == nullptr){
+            return;
+        }
+        
+        inorder(root->left,ans);
+        ans.push_back(root->val);
+        inorder(root->right,ans);
+    }
     bool isValidBST(TreeNode* root) {
-        return isValidBSTHelper(root, LONG_MIN, LONG_MAX);
+        vector<int> ans;
+        inorder(root,ans);
+        cout<<ans.size();
+        for(int i = 0 ; i < ans.size();i++){
+            cout<<ans[i];
+        }
+        for(int i = 1 ; i < ans.size();i++){
+            if(ans[i-1] >= ans[i]){
+                return false;
+            }
+        }
+        return true;
+        // return isValidBSTHelper(root, LONG_MIN, LONG_MAX);
     }
 
     bool isValidBSTHelper(TreeNode* root, long minVal, long maxVal) {
